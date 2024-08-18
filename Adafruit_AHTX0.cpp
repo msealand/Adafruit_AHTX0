@@ -171,7 +171,6 @@ bool Adafruit_AHTX0::getEvent(sensors_event_t *humidity,
 void Adafruit_AHTX0::fillTempEvent(sensors_event_t *temp, uint32_t timestamp) {
   memset(temp, 0, sizeof(sensors_event_t));
   temp->version = sizeof(sensors_event_t);
-  temp->sensor_id = _sensorid_temp;
   temp->type = SENSOR_TYPE_AMBIENT_TEMPERATURE;
   temp->timestamp = timestamp;
   temp->temperature = _temperature;
@@ -181,8 +180,7 @@ void Adafruit_AHTX0::fillHumidityEvent(sensors_event_t *humidity,
                                        uint32_t timestamp) {
   memset(humidity, 0, sizeof(sensors_event_t));
   humidity->version = sizeof(sensors_event_t);
-  humidity->sensor_id = _sensorid_humidity;
-  humidity->type = SENSOR_TYPE_AMBIENT_TEMPERATURE;
+  humidity->type = SENSOR_TYPE_RELATIVE_HUMIDITY;
   humidity->timestamp = timestamp;
   humidity->relative_humidity = _humidity;
 }
@@ -231,6 +229,7 @@ void Adafruit_AHTX0_Humidity::getSensor(sensor_t *sensor) {
  */
 bool Adafruit_AHTX0_Humidity::getEvent(sensors_event_t *event) {
   _theAHTX0->getEvent(event, NULL);
+  event->sensor_id = _sensorID;
 
   return true;
 }
@@ -261,6 +260,7 @@ void Adafruit_AHTX0_Temp::getSensor(sensor_t *sensor) {
 */
 bool Adafruit_AHTX0_Temp::getEvent(sensors_event_t *event) {
   _theAHTX0->getEvent(NULL, event);
+  event->sensor_id = _sensorID;
 
   return true;
 }

@@ -92,9 +92,6 @@ protected:
   float _temperature, ///< Last reading's temperature (C)
       _humidity;      ///< Last reading's humidity (percent)
 
-  uint16_t _sensorid_humidity; ///< ID number for humidity
-  uint16_t _sensorid_temp;     ///< ID number for temperature
-
   Adafruit_I2CDevice *i2c_dev = NULL; ///< Pointer to I2C bus interface
 
   Adafruit_AHTX0_Temp *temp_sensor = NULL; ///< Temp sensor data object
